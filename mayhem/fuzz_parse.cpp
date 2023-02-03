@@ -1,10 +1,10 @@
 #include <cstdlib>
 #include <iostream>
+#include <fuzzer/FuzzedDataProvider.h>
 
 #include <highfive/H5File.hpp>
 #include <highfive/H5Easy.hpp>
 
-#include "FuzzedDataProvider.h"
 
 using namespace HighFive;
 typedef typename boost::numeric::ublas::matrix<double> Matrix;
