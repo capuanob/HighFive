@@ -18,7 +18,7 @@ extern "C" __attribute__((unused)) int LLVMFuzzerTestOneInput(const uint8_t *fuz
     auto test_matrix = fdp.ConsumeBool();
 
     if (test_matrix) {
-        File file("/dev/null", File::Truncate);
+        File file("test", File::Truncate);
         auto size_x = static_cast<std::size_t>(fdp.ConsumeIntegralInRange<size_t>(1, 100));
         auto size_y = static_cast<std::size_t>(fdp.ConsumeIntegralInRange<size_t>(1, 100));
 
@@ -34,7 +34,7 @@ extern "C" __attribute__((unused)) int LLVMFuzzerTestOneInput(const uint8_t *fuz
         auto dataset = file.createDataSet<double>("data", DataSpace::From(matrix));
         dataset.read(result);
     } else {
-        H5Easy::File file("/dev/null", H5Easy::File::Overwrite);
+        H5Easy::File file("test", H5Easy::File::Overwrite);
         H5Easy::dump(file, "data", fdp.ConsumeRemainingBytesAsString());
 
         auto contents = H5Easy::load<std::string>(file, "data");
